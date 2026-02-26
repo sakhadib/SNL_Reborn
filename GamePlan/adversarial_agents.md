@@ -233,7 +233,9 @@ $$
 
 **Component definitions:**
 
-$$\text{progress}(d) = \text{final\_pos}(d) - \text{current\_pos}$$
+$$
+\text{progress}(d) = \text{final\_pos}(d) - \text{current\_pos}
+$$
 
 $$
 \text{ladder\_gain}(d) = \begin{cases}
@@ -249,13 +251,21 @@ $$
 \end{cases}
 $$
 
-$$\text{scorpion\_penalty}(d) = 6 \quad \text{(3-turn tempo cost proxy)}$$
+$$
+\text{scorpion\_penalty}(d) = 6 \quad \text{(3-turn tempo cost proxy)}
+$$
 
-$$\text{grape\_bonus}(d) = \text{fixed value (represents 3-turn protection)}$$
+$$
+\text{grape\_bonus}(d) = \text{fixed value (represents 3-turn protection)}
+$$
 
-$$\text{capture\_bonus}(d) = \text{opponent\_pos} - \text{nearest\_safe\_zone}(\text{opponent\_pos})$$
+$$
+\text{capture\_bonus}(d) = \text{opponent\_pos} - \text{nearest\_safe\_zone}(\text{opponent\_pos})
+$$
 
-$$\text{exposure\_penalty}(d) = \text{expected demotion distance if opponent captures}$$
+$$
+\text{exposure\_penalty}(d) = \text{expected demotion distance if opponent captures}
+$$
 
 **Decision rule:**
 
