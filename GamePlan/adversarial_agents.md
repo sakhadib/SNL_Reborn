@@ -17,19 +17,19 @@ $$
 
 Let $d$ denote a die value. Define:
 
-- $\text{legal}(d)$ := $\text{pos} + d \leq 100$
-- $\text{landing}(d)$ := $\text{pos} + d$
-- $\text{final\_pos}(d)$ := position after applying square effect (including snake/ladder, ignoring capture)
-- $\text{is\_snake}(d)$ := $\text{landing}(d)$ is snake head and not immune
-- $\text{is\_scorpion}(d)$ := $\text{landing}(d)$ is scorpion and not immune
-- $\text{is\_grape}(d)$ := $\text{landing}(d)$ is grapes
-- $\text{is\_safe}(d)$ := $\text{landing}(d) \in \text{SafeZones}$
-- $\text{captures}(d)$ := $\text{final\_pos}(d) = \text{opponent\_pos}$ and opponent not on safe zone
+- $\text{legal}(d) := \text{pos} + d \leq 100$
+- $\text{landing}(d) := \text{pos} + d$
+- $\text{final\_pos}(d) :=$ position after applying square effect (including snake/ladder, ignoring capture)
+- $\text{is\_snake}(d) :=$ $\text{landing}(d)$ is snake head and not immune
+- $\text{is\_scorpion}(d) :=$ $\text{landing}(d)$ is scorpion and not immune
+- $\text{is\_grape}(d) :=$ $\text{landing}(d)$ is grapes
+- $\text{is\_safe}(d) := \text{landing}(d) \in \text{SafeZones}$
+- $\text{captures}(d) :=$ $\text{final\_pos}(d) = \text{opponent\_pos}$ and opponent not on safe zone
 
 **Illegal move handling:**
 
-- If $\text{legal}(d) = \text{false}$ → move treated as illegal
-- If both moves illegal → skip
+- If $\text{legal}(d) = \text{false}$ $\to$ move treated as illegal
+- If both moves illegal $\to$ skip
 
                       --
 
@@ -40,7 +40,7 @@ Let $d$ denote a die value. Define:
 Rule:
 1. Filter legal dice.
 2. Choose die with maximum d.
-3. If none legal → skip.
+3. If none legal $\to$ skip.
 
 **Pseudocode:**
 
@@ -62,14 +62,14 @@ else:
 Rule:
 1. Filter legal dice.
 2. Choose die with minimum d.
-3. If none legal → skip.
+3. If none legal $\to$ skip.
 
  
 
 ## 3. EXACTOR
 
 Rule:
-1. If $\text{landing}(d) = 100$ → choose it.
+1. If $\text{landing}(d) = 100$ $\to$ choose it.
 2. Else behave as MAXIM.
 
 **Pseudocode:**
@@ -90,9 +90,9 @@ return MAXIM_policy()
 
 Rule priority:
 1. Prefer legal move not landing on snake.
-2. If both non-snake → choose larger.
-3. If both snake → choose smaller snake.
-4. If one illegal and one snake → skip.
+2. If both non-snake $\to$ choose larger.
+3. If both snake $\to$ choose smaller snake.
+4. If one illegal and one snake $\to$ skip.
 
 **Pseudocode:**
 
@@ -115,14 +115,14 @@ else:
 Rule:
 1. Avoid scorpion if possible.
 2. Among safe moves choose larger.
-3. If both scorpion → choose smaller.
+3. If both scorpion $\to$ choose smaller.
 
  
 
 ## 6. SAFE_PREFERRER
 
 Rule priority:
-1. If any legal move lands on safe zone → choose it.
+1. If any legal move lands on safe zone $\to$ choose it.
 2. Else avoid snake.
 3. Else choose larger legal.
 4. Else skip.
@@ -134,7 +134,7 @@ Rule priority:
 ## 7. HUNTER
 
 Rule:
-1. If any legal move captures opponent → choose it.
+1. If any legal move captures opponent $\to$ choose it.
 2. Else MAXIM.
 
 **Pseudocode:**
@@ -162,7 +162,7 @@ Rule:
 
 **Define exposure:**
 
-$\text{exposed}(d)$ := opponent can capture new position in one turn
+$\text{exposed}(d) :=$ opponent can capture new position in one turn
 
 **Rule:**
 1. Avoid exposed moves.
@@ -177,7 +177,7 @@ $\text{exposed}(d)$ := opponent can capture new position in one turn
 ## 10. GRAPE_SEEKER
 
 Rule:
-1. If legal move lands on grapes → choose it.
+1. If legal move lands on grapes $\to$ choose it.
 2. Else avoid snake.
 3. Else MAXIM.
 
@@ -269,7 +269,7 @@ $$
 
 **Decision rule:**
 
-If both moves illegal → skip.
+If both moves illegal $\to$ skip.
 
 Otherwise, agent chooses:
 
