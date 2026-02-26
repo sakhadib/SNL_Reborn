@@ -119,7 +119,7 @@ $$
 Then:
 
 $$
-A = \{ \text{choose\_die\_1}, \text{choose\_die\_2}, \text{skip} \}
+A = \{ \text{choose die 1}, \text{choose die 2}, \text{skip} \}
 $$
 
 If:
@@ -131,7 +131,7 @@ $$
 Then:
 
 $$
-A = \{ \text{forced\_skip} \}
+A = \{ \text{forced skip} \}
 $$
 
  
@@ -222,14 +222,14 @@ Proceed to capture rule.
 Otherwise:
 
 $$
-\text{temp\_pos} = P_{\text{pos}} + d
+\text{temp pos} = P_{\text{pos}} + d
 $$
 
  
 
 ### 8.4 Square Effect Resolution
 
-Let $\text{square\_type}(\text{temp\_pos})$ be defined by the fixed board.
+Let $\text{square type}(\text{temp pos})$ be defined by the fixed board.
 
 If $P_{\text{immune}} > 0$:
 Snake and scorpion effects are ignored.
@@ -237,32 +237,32 @@ Snake and scorpion effects are ignored.
 Apply square type:
 
 **Normal:**
-$$P'_{\text{pos}} = \text{temp\_pos}$$
+$$P'_{\text{pos}} = \text{temp pos}$$
 
 **Ladder:**
-$$P'_{\text{pos}} = \text{ladder\_top}(\text{temp\_pos})$$
+$$P'_{\text{pos}} = \text{ladder top}(\text{temp pos})$$
 
 **Snake:**
 If $P_{\text{immune}} = 0$:
-$$P'_{\text{pos}} = \text{snake\_tail}(\text{temp\_pos})$$
+$$P'_{\text{pos}} = \text{snake tail}(\text{temp pos})$$
 Else:
-$$P'_{\text{pos}} = \text{temp\_pos}$$
+$$P'_{\text{pos}} = \text{temp pos}$$
 
 **Scorpion:**
-$$P'_{\text{pos}} = \text{temp\_pos}$$
+$$P'_{\text{pos}} = \text{temp pos}$$
 If $P_{\text{immune}} = 0$:
 $$P'_{\text{stun}} = 3$$
 
 **Grapes:**
 $$
 \begin{align*}
-P'_{\text{pos}} &= \text{temp\_pos} \\
+P'_{\text{pos}} &= \text{temp pos} \\
 P'_{\text{immune}} &= 3
 \end{align*}
 $$
 
 **Safe Zone:**
-$$P'_{\text{pos}} = \text{temp\_pos}$$
+$$P'_{\text{pos}} = \text{temp pos}$$
 
 If grapes not triggered:
 $P'_{\text{immune}}$ remains previous value.
