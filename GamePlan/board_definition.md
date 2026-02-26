@@ -144,19 +144,23 @@ All remaining squares not listed above are normal squares.
 
 ## 7. Mutual Exclusivity Constraint
 
-Let:
+Let the following sets be defined:
+
+- $S_1 = \text{SafeZones}$
+- $S_2 = \text{LadderBases}$
+- $S_3 = \text{LadderTops}$
+- $S_4 = \text{SnakeHeads}$
+- $S_5 = \text{SnakeTails}$
+- $S_6 = \text{ScorpionSquares}$
+- $S_7 = \text{GrapeSquares}$
+
+Then:
 
 $$
-\begin{align*}
-\text{SpecialSquares} =\, &\text{SafeZones} \cup \\
-&\text{LadderBases} \cup \text{LadderTops} \cup \\
-&\text{SnakeHeads} \cup \text{SnakeTails} \cup \\
-&\text{ScorpionSquares} \cup \\
-&\text{GrapeSquares}
-\end{align*}
+\text{SpecialSquares} = S_1 \cup S_2 \cup S_3 \cup S_4 \cup S_5 \cup S_6 \cup S_7
 $$
 
-Constraint:
+**Constraint:**
 
 For all $x \in \{0,\ldots,100\}$, $x$ belongs to at most one category.
 
