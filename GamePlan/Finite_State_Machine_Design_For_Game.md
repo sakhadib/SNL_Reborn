@@ -56,15 +56,19 @@ This state fully determines future transitions.
 ## 3. State Space Size Calculation
 
 Positions:
+
 $$101 \times 101 = 10,201$$
 
 Stun counters:
+
 $$4 \times 4 = 16$$
 
 Immunity counters:
+
 $$4 \times 4 = 16$$
 
 Turn indicator:
+
 $$2$$
 
 Total state space:
@@ -204,9 +208,11 @@ $$
 Proceed to capture rule.
 
 If action = choose_die_1:
+
 $$d = d_1$$
 
 If action = choose_die_2:
+
 $$d = d_2$$
 
 Illegal move condition:
@@ -237,23 +243,33 @@ Snake and scorpion effects are ignored.
 Apply square type:
 
 **Normal:**
+
 $$P'_{\text{pos}} = \text{temp pos}$$
 
 **Ladder:**
+
 $$P'_{\text{pos}} = \text{ladder top}(\text{temp pos})$$
 
 **Snake:**
+
 If $P_{\text{immune}} = 0$:
+
 $$P'_{\text{pos}} = \text{snake tail}(\text{temp pos})$$
+
 Else:
+
 $$P'_{\text{pos}} = \text{temp pos}$$
 
 **Scorpion:**
+
 $$P'_{\text{pos}} = \text{temp pos}$$
+
 If $P_{\text{immune}} = 0$:
+
 $$P'_{\text{stun}} = 3$$
 
 **Grapes:**
+
 $$
 \begin{align*}
 P'_{\text{pos}} &= \text{temp pos} \\
@@ -262,6 +278,7 @@ P'_{\text{immune}} &= 3
 $$
 
 **Safe Zone:**
+
 $$P'_{\text{pos}} = \text{temp pos}$$
 
 If grapes not triggered:
@@ -289,6 +306,7 @@ If $O_{\text{pos}} \in \text{SafeZones}$:
 No demotion.
 
 Else:
+
 $$O'_{\text{pos}} = \max \{ s \in \text{SafeZones} \mid s \leq O_{\text{pos}} \}$$
 
 Demotion does not trigger square effects.
@@ -301,6 +319,7 @@ Demotion does not alter stun or immunity.
 At the end of $P$'s turn:
 
 If $P'_{\text{immune}} > 0$:
+
 $$P'_{\text{immune}} = P'_{\text{immune}} - 1$$
 
 Opponent immunity unaffected.
