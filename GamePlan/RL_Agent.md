@@ -34,12 +34,12 @@ State vector:
 
 $$
 o = \begin{bmatrix}
-\frac{\text{self\_pos}}{100} \\
-\frac{\text{self\_stun}}{3} \\
-\frac{\text{self\_immune}}{3} \\
-\frac{\text{opp\_pos}}{100} \\
-\frac{\text{opp\_stun}}{3} \\
-\frac{\text{opp\_immune}}{3}
+\frac{\text{self pos}}{100} \\
+\frac{\text{self stun}}{3} \\
+\frac{\text{self immune}}{3} \\
+\frac{\text{opp pos}}{100} \\
+\frac{\text{opp stun}}{3} \\
+\frac{\text{opp immune}}{3}
 \end{bmatrix}
 $$
 
@@ -78,7 +78,7 @@ Reward must be stationary, bounded, and dominance-sensitive.
 Let:
 
 * $S = 1$ if win, $0$ if loss
-* $D = 100 - \text{losing\_position}$
+* $D = 100 -$ losing_position
 * $D_{\text{rel}} = D / 100$
 * $\alpha = 0.75$
 
