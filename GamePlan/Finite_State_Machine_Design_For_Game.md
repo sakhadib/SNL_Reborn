@@ -5,16 +5,18 @@
 
 The game is modeled as a finite, fully observable, turn-based stochastic state machine:
 
-FSM = (S, A, Ω, T, s₀, F)
+$$
+\text{FSM} = (S, A, \Omega, T, s_0, F)
+$$
 
 Where:
 
-- S = finite set of states  
-- A = set of actions  
-- Ω = stochastic input space (dice outcomes)  
-- T: S × A × Ω → S = transition function  
-- s₀ = initial state  
-- F ⊂ S = terminal states  
+- $S$ = finite set of states  
+- $A$ = set of actions  
+- $\Omega$ = stochastic input space (dice outcomes)  
+- $T: S \times A \times \Omega \to S$ = transition function  
+- $s_0$ = initial state  
+- $F \subset S$ = terminal states  
 
 The system is deterministic given a state, action, and dice outcome.
 
@@ -22,24 +24,30 @@ The system is deterministic given a state, action, and dice outcome.
 
 ## 2. State Space Definition
 
-Each state s ∈ S is defined as:
+Each state $s \in S$ is defined as:
 
+$$
 s = (
-    A_pos,
-    A_stun,
-    A_immune,
-    B_pos,
-    B_stun,
-    B_immune,
-    turn
+    A_{\text{pos}},
+    A_{\text{stun}},
+    A_{\text{immune}},
+    B_{\text{pos}},
+    B_{\text{stun}},
+    B_{\text{immune}},
+    \text{turn}
 )
+$$
 
 Domains:
 
-A_pos, B_pos ∈ {0,1,...,100}  
-A_stun, B_stun ∈ {0,1,2,3}  
-A_immune, B_immune ∈ {0,1,2,3}  
-turn ∈ {A, B}  
+$$
+\begin{align*}
+A_{\text{pos}}, B_{\text{pos}} &\in \{0,1,\ldots,100\} \\
+A_{\text{stun}}, B_{\text{stun}} &\in \{0,1,2,3\} \\
+A_{\text{immune}}, B_{\text{immune}} &\in \{0,1,2,3\} \\
+\text{turn} &\in \{A, B\}
+\end{align*}
+$$  
 
 This state fully determines future transitions.
 
@@ -48,31 +56,37 @@ This state fully determines future transitions.
 ## 3. State Space Size Calculation
 
 Positions:
-101 × 101 = 10,201
+$$101 \times 101 = 10,201$$
 
 Stun counters:
-4 × 4 = 16
+$$4 \times 4 = 16$$
 
 Immunity counters:
-4 × 4 = 16
+$$4 \times 4 = 16$$
 
 Turn indicator:
-2
+$$2$$
 
 Total state space:
 
-|S| = 10,201 × 16 × 16 × 2  
-|S| = 10,201 × 256 × 2  
-|S| = 10,201 × 512  
-|S| = 5,222,912
+$$
+\begin{align*}
+|S| &= 10,201 \times 16 \times 16 \times 2 \\
+|S| &= 10,201 \times 256 \times 2 \\
+|S| &= 10,201 \times 512 \\
+|S| &= 5,222,912
+\end{align*}
+$$
 
-The system contains exactly 5,222,912 states.
+The system contains exactly **5,222,912** states.
 
  
 
 ## 4. Initial State
 
-s₀ = (0,0,0, 0,0,0, A)
+$$
+s_0 = (0,0,0, 0,0,0, A)
+$$
 
 Player A moves first.
 
@@ -80,41 +94,57 @@ Player A moves first.
 
 ## 5. Terminal States
 
-F = { s ∈ S | A_pos = 100 or B_pos = 100 }
+$$
+F = \{ s \in S \mid A_{\text{pos}} = 100 \text{ or } B_{\text{pos}} = 100 \}
+$$
 
 Terminal states are absorbing:
 
-For all s ∈ F and all actions a and dice outcomes ω:
+For all $s \in F$ and all actions $a$ and dice outcomes $\omega$:
 
-T(s, a, ω) = s
+$$
+T(s, a, \omega) = s
+$$
 
  
 
 ## 6. Action Space
 
-If current player P has:
+If current player $P$ has:
 
-P_stun = 0
+$$
+P_{\text{stun}} = 0
+$$
 
 Then:
 
-A = { choose_die_1, choose_die_2, skip }
+$$
+A = \{ \text{choose\_die\_1}, \text{choose\_die\_2}, \text{skip} \}
+$$
 
 If:
 
-P_stun > 0
+$$
+P_{\text{stun}} > 0
+$$
 
 Then:
 
-A = { forced_skip }
+$$
+A = \{ \text{forced\_skip} \}
+$$
 
  
 
 ## 7. Stochastic Input Space
 
-Ω = { (d1, d2) | d1 ∈ {1..6}, d2 ∈ {1..6} }
+$$
+\Omega = \{ (d_1, d_2) \mid d_1 \in \{1..6\}, d_2 \in \{1..6\} \}
+$$
 
-|Ω| = 6 × 6 = 36
+$$
+|\Omega| = 6 \times 6 = 36
+$$
 
 Dice are independent and uniformly distributed.
 
@@ -122,107 +152,129 @@ Dice are independent and uniformly distributed.
 
 ## 8. Transition Function
 
-T : S × A × Ω → S
+$$
+T : S \times A \times \Omega \to S
+$$
 
-Let P denote the current player.
-Let O denote the opponent.
+Let $P$ denote the current player.
+Let $O$ denote the opponent.
 
 ### 8.1 Terminal Condition
 
-If s ∈ F:
+If $s \in F$:
 
-T(s, a, ω) = s
+$$
+T(s, a, \omega) = s
+$$
 
  
 
 ### 8.2 Stun Resolution
 
-If P_stun > 0:
+If $P_{\text{stun}} > 0$:
 
-P_stun'   = P_stun − 1  
-P_immune' = max(P_immune − 1, 0)  
-P_pos'    = P_pos  
+$$
+\begin{align*}
+P'_{\text{stun}} &= P_{\text{stun}} - 1 \\
+P'_{\text{immune}} &= \max(P_{\text{immune}} - 1, 0) \\
+P'_{\text{pos}} &= P_{\text{pos}}
+\end{align*}
+$$
 
 Opponent state unchanged.
 
-turn' = O
+$$
+\text{turn}' = O
+$$
 
 Turn alternates even if both players are stunned.
 
  
 
-### 8.3 Active Turn (P_stun = 0)
+### 8.3 Active Turn ($P_{\text{stun}} = 0$)
 
-Let ω = (d1, d2).
+Let $\omega = (d_1, d_2)$.
 
 If action = skip:
 
-P_pos' = P_pos  
+$$
+P'_{\text{pos}} = P_{\text{pos}}
+$$
+
 Proceed to capture rule.
 
 If action = choose_die_1:
-d = d1
+$$d = d_1$$
 
 If action = choose_die_2:
-d = d2
+$$d = d_2$$
 
 Illegal move condition:
 
-If P_pos + d > 100:
+If $P_{\text{pos}} + d > 100$:
 
-P_pos' = P_pos  
+$$
+P'_{\text{pos}} = P_{\text{pos}}
+$$
+
 Proceed to capture rule.
 
 Otherwise:
 
-temp_pos = P_pos + d
+$$
+\text{temp\_pos} = P_{\text{pos}} + d
+$$
 
  
 
 ### 8.4 Square Effect Resolution
 
-Let square_type(temp_pos) be defined by the fixed board.
+Let $\text{square\_type}(\text{temp\_pos})$ be defined by the fixed board.
 
-If P_immune > 0:
+If $P_{\text{immune}} > 0$:
 Snake and scorpion effects are ignored.
 
 Apply square type:
 
-Normal:
-P_pos' = temp_pos
+**Normal:**
+$$P'_{\text{pos}} = \text{temp\_pos}$$
 
-Ladder:
-P_pos' = ladder_top(temp_pos)
+**Ladder:**
+$$P'_{\text{pos}} = \text{ladder\_top}(\text{temp\_pos})$$
 
-Snake:
-If P_immune = 0:
-P_pos' = snake_tail(temp_pos)
+**Snake:**
+If $P_{\text{immune}} = 0$:
+$$P'_{\text{pos}} = \text{snake\_tail}(\text{temp\_pos})$$
 Else:
-P_pos' = temp_pos
+$$P'_{\text{pos}} = \text{temp\_pos}$$
 
-Scorpion:
-P_pos' = temp_pos
-If P_immune = 0:
-P_stun' = 3
+**Scorpion:**
+$$P'_{\text{pos}} = \text{temp\_pos}$$
+If $P_{\text{immune}} = 0$:
+$$P'_{\text{stun}} = 3$$
 
-Grapes:
-P_pos' = temp_pos
-P_immune' = 3
+**Grapes:**
+$$
+\begin{align*}
+P'_{\text{pos}} &= \text{temp\_pos} \\
+P'_{\text{immune}} &= 3
+\end{align*}
+$$
 
-Safe Zone:
-P_pos' = temp_pos
+**Safe Zone:**
+$$P'_{\text{pos}} = \text{temp\_pos}$$
 
 If grapes not triggered:
-P_immune' remains previous value.
+$P'_{\text{immune}}$ remains previous value.
 
 If scorpion not triggered:
-P_stun' remains previous value.
+$P'_{\text{stun}}$ remains previous value.
 
  
 
 ### 8.5 Win Check
 
-If P_pos' = 100:
+If $P'_{\text{pos}} = 100$:
 
 The state becomes terminal immediately.
 Capture is not applied.
@@ -231,13 +283,13 @@ Capture is not applied.
 
 ### 8.6 Capture Rule
 
-If P_pos' = O_pos:
+If $P'_{\text{pos}} = O_{\text{pos}}$:
 
-If O_pos ∈ SafeZones:
+If $O_{\text{pos}} \in \text{SafeZones}$:
 No demotion.
 
 Else:
-O_pos' = max { s ∈ SafeZones | s ≤ O_pos }
+$$O'_{\text{pos}} = \max \{ s \in \text{SafeZones} \mid s \leq O_{\text{pos}} \}$$
 
 Demotion does not trigger square effects.
 Demotion does not alter stun or immunity.
@@ -246,10 +298,10 @@ Demotion does not alter stun or immunity.
 
 ### 8.7 Immunity Decay
 
-At the end of P’s turn:
+At the end of $P$'s turn:
 
-If P_immune' > 0:
-P_immune' = P_immune' − 1
+If $P'_{\text{immune}} > 0$:
+$$P'_{\text{immune}} = P'_{\text{immune}} - 1$$
 
 Opponent immunity unaffected.
 
@@ -257,17 +309,21 @@ Opponent immunity unaffected.
 
 ### 8.8 Turn Switch
 
-turn' = O
+$$
+\text{turn}' = O
+$$
 
  
 
 ## 9. Determinism
 
-For any state s ∈ S, action a ∈ A, and dice outcome ω ∈ Ω:
+For any state $s \in S$, action $a \in A$, and dice outcome $\omega \in \Omega$:
 
-There exists exactly one s' ∈ S such that:
+There exists exactly one $s' \in S$ such that:
 
-T(s, a, ω) = s'
+$$
+T(s, a, \omega) = s'
+$$
 
 The system is deterministic conditioned on dice and action.
 
@@ -275,5 +331,5 @@ The system is deterministic conditioned on dice and action.
 
 ## 10. Observability
 
-The full state s is observable to both players.
+The full state $s$ is observable to both players.
 There are no hidden variables.
