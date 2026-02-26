@@ -15,7 +15,7 @@ If both dice illegal → return `skip`.
 
 We denote dice as `d1`, `d2`.
 
----
+ 
 
 # 1. MAXIM
 
@@ -36,7 +36,7 @@ else:
 
 **Behavior:** Aggressive. Ignores risk.
 
----
+ 
 
 # 2. MINIM
 
@@ -57,7 +57,7 @@ else:
 
 **Behavior:** Conservative baseline.
 
----
+ 
 
 # 3. EXACTOR
 
@@ -75,7 +75,7 @@ return MAXIM policy
 
 **Behavior:** Same as MAXIM except exact-win priority.
 
----
+ 
 
 # 4. SNAKE_AVOIDER
 
@@ -100,7 +100,7 @@ return skip
 
 **Behavior:** Penalizes snake heads.
 
----
+ 
 
 # 5. SCORPION_AVOIDER
 
@@ -125,7 +125,7 @@ return skip
 
 **Behavior:** Stun minimizer.
 
----
+ 
 
 # 6. SAFE_PREFERRER
 
@@ -143,7 +143,7 @@ return SNAKE_AVOIDER policy
 
 **Behavior:** Defensive positional anchor.
 
----
+ 
 
 # 7. HUNTER
 
@@ -161,7 +161,7 @@ return MAXIM policy
 
 **Behavior:** Always prioritizes capture.
 
----
+ 
 
 # 8. SAFE_HUNTER
 
@@ -179,7 +179,7 @@ return SNAKE_AVOIDER policy
 
 **Behavior:** Avoids useless captures.
 
----
+ 
 
 # 9. ANTI_CAPTURE
 
@@ -204,7 +204,7 @@ return skip
 
 **Behavior:** One-step opponent modeling.
 
----
+ 
 
 # 10. GRAPE_SEEKER
 
@@ -222,7 +222,7 @@ return SNAKE_AVOIDER policy
 
 **Behavior:** Timing-based immunity play.
 
----
+ 
 
 # 11. IMMUNE_AGGRESSOR
 
@@ -239,7 +239,7 @@ else:
 
 **Behavior:** Risk-on when immune.
 
----
+ 
 
 # 12. STUN_EXPLOITER
 
@@ -256,7 +256,7 @@ else:
 
 **Behavior:** Aggressive only when opponent frozen.
 
----
+ 
 
 # 13. BALANCED_EVAL
 
@@ -295,7 +295,7 @@ return best_move
 
 **Behavior:** Generalist.
 
----
+ 
 
 # 14. RISK_SEEKER
 
@@ -316,7 +316,7 @@ score(d) =
 
 **Behavior:** Aggressive, high swing.
 
----
+ 
 
 # 15. RISK_AVERSE
 
