@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from .enums import Player, Action, MIN_DICE, MAX_DICE, WINNING_POSITION
 from .board import Board, CANONICAL_BOARD
 from .game_state import GameState
+from .replay import GameReplay
 
 
 @dataclass
@@ -83,6 +84,7 @@ class GameEngine:
     def __init__(self, board: Optional[Board] = None):
         """Initialize game engine with board configuration."""
         self.board = board or CANONICAL_BOARD
+        self.replay = GameReplay(initial_state=GameState.initial_state(self.board))
     
     def validate_action(
         self,
@@ -176,6 +178,7 @@ class GameEngine:
         # Handle stunned player
         if state.is_player_stunned(current_player):
             new_state = self._handle_stunned_turn(state, current_player)
+            self.replay.add_move(move_info)
             move_info.final_state = new_state
             return new_state, move_info
         
@@ -200,6 +203,7 @@ class GameEngine:
             move_info.final_position = current_pos  # Stay in place
             new_state = self._end_turn(state, current_player)
             move_info.final_state = new_state
+            self.replay.add_move(move_info)
             return new_state, move_info
         
         # Apply square effects
@@ -210,6 +214,7 @@ class GameEngine:
         # Check for win condition
         if move_info.final_position == WINNING_POSITION:
             move_info.final_state = new_state
+            self.replay.add_move(move_info)
             return new_state, move_info
         
         # Apply capture rule
@@ -219,6 +224,7 @@ class GameEngine:
         new_state = self._end_turn(new_state, current_player)
         
         move_info.final_state = new_state
+        self.replay.add_move(move_info)
         return new_state, move_info
     
     def _handle_stunned_turn(self, state: GameState, player: Player) -> GameState:
@@ -374,3 +380,13 @@ class GameEngine:
                 legal_actions.append(action)
         
         return legal_actions
+    
+    def reset_replay(self, initial_state: Optional[GameState] = None):
+        """Reset replay for a new game."""
+        if initial_state is None:
+            initial_state = GameState.initial_state(self.board)
+        self.replay = GameReplay(initial_state=initial_state)
+    
+    def get_replay(self) -> GameReplay:
+        """Get current game replay."""
+        return self.replay

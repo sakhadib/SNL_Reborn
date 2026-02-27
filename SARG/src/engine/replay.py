@@ -2,9 +2,10 @@
 Game Replay System - Track and visualize complete game history.
 """
 
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, TYPE_CHECKING
 from dataclasses import dataclass, field
-from .game_engine import GameEngine, MoveInfo
+if TYPE_CHECKING:
+    from .game_engine import MoveInfo
 from .game_state import GameState
 from .board import Board, CANONICAL_BOARD
 from .enums import Player, Action
@@ -17,10 +18,10 @@ class GameReplay:
     Can reconstruct any point in the game.
     """
     initial_state: GameState
-    moves: List[MoveInfo] = field(default_factory=list)
+    moves: List['MoveInfo'] = field(default_factory=list)
     board: Board = CANONICAL_BOARD
     
-    def add_move(self, move_info: MoveInfo) -> None:
+    def add_move(self, move_info: 'MoveInfo') -> None:
         """Add a move to the replay history."""
         self.moves.append(move_info)
     
@@ -164,7 +165,7 @@ class GameReplay:
 
 
 def simulate_game(
-    engine: GameEngine,
+    engine: 'GameEngine',
     dice_sequence: List[Tuple[int, int]],
     action_sequence: List[Action],
     verbose: bool = False
