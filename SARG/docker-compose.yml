@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  sarg-dev:
+    # To use pre-built image from Docker Hub, uncomment the line below and comment out the build section:
+    # image: YOUR_DOCKERHUB_USERNAME/sarg:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sarg:dev
+    container_name: sarg-research
+    volumes:
+      # Mount source code
+      - ./src:/workspace/src
+      - ./tests:/workspace/tests
+      - ./configs:/workspace/configs
+      - ./notebooks:/workspace/notebooks
+      # Mount data directories (persistent)
+      - ./data/games:/workspace/data/games
+      - ./data/logs:/workspace/data/logs
+      - ./data/models:/workspace/data/models
+      # Mount GamePlan documentation
+      - ../GamePlan:/workspace/docs
+    working_dir: /workspace
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    environment:
+      - PYTHONPATH=/workspace/src
+      - SARG_DATA_DIR=/workspace/data
+      - SARG_CONFIG_DIR=/workspace/configs
+    # Expose Jupyter and TensorBoard ports
+    ports:
+      - "8888:8888"  # Jupyter
+      - "6006:6006"  # TensorBoard
+    # Resource limits (adjust based on your system)
+    deploy:
+      resources:
+        limits:
+          cpus: '8'
+          memory: 16G
+        reservations:
+          cpus: '4'
+          memory: 8G
+
+  # Optional: Jupyter notebook service
+  jupyter:
+    # To use pre-built image from Docker Hub, uncomment the line below and comment out the build section:
+    # image: YOUR_DOCKERHUB_USERNAME/sarg:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sarg:dev
+    container_name: sarg-jupyter
+    volumes:
+      - ./src:/workspace/src
+      - ./tests:/workspace/tests
+      - ./configs:/workspace/configs
+      - ./notebooks:/workspace/notebooks
+      - ./data:/workspace/data
+      - ../GamePlan:/workspace/docs
+    working_dir: /workspace
+    command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=''
+    ports:
+      - "8888:8888"
+    environment:
+      - PYTHONPATH=/workspace/src
+      - SARG_DATA_DIR=/workspace/data
+    profiles:
+      - jupyter
+
+  # Optional: TensorBoard service
+  tensorboard:
+    # To use pre-built image from Docker Hub, uncomment the line below and comment out the build section:
+    # image: YOUR_DOCKERHUB_USERNAME/sarg:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sarg:dev
+    container_name: sarg-tensorboard
+    volumes:
+      - ./data/logs:/workspace/data/logs
+    working_dir: /workspace
+    command: tensorboard --logdir=/workspace/data/logs --host=0.0.0.0 --port=6006
+    ports:
+      - "6006:6006"
+    profiles:
+      - tensorboard
