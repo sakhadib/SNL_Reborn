@@ -37,24 +37,24 @@ DEFAULT_CONFIG: Dict[str, Any] = {
     # ==================== Curriculum Training ====================
     # Phase 1: Random Opponent
     "phase_1_min_episodes": 150000,  # Lower threshold to avoid saturation
-    "phase_1_max_episodes": 1000000,
-    "phase_1_target_wr": 0.90,  # Higher threshold for stable progression
+    "phase_1_max_episodes": 200000,
+    "phase_1_target_wr": 0.88,  # Realistic stable threshold (currently achieving this)
     
     # Phase 2: Weak Heuristics (MAXIM, MINIM, EXACTOR)
-    "phase_2_min_episodes": 500000,
-    "phase_2_max_episodes": 1000000,
+    "phase_2_min_episodes": 200000,
+    "phase_2_max_episodes": 500000,
     "phase_2_target_wr": 0.60,
     "phase_2_opponents": ["maxim", "minim", "exactor"],
     
     # Phase 3: All Heuristics
-    "phase_3_min_episodes": 1000000,
-    "phase_3_max_episodes": 2000000,
+    "phase_3_min_episodes": 500000,
+    "phase_3_max_episodes": 1000000,
     "phase_3_target_wr": 0.55,
     "phase_3_opponents": "all",  # All 15 heuristic agents
     
     # Phase 4: Self-Play
-    "phase_4_min_episodes": 2000000,
-    "phase_4_max_episodes": 5000000,
+    "phase_4_min_episodes": 1500000,
+    "phase_4_max_episodes": 2000000,
     "phase_4_snapshot_freq": 100000,    # Save snapshot every N episodes
     "phase_4_snapshot_pool_size": 5,     # Keep last N snapshots
     "phase_4_self_play_ratio": 0.7,     # 70% vs snapshots, 30% vs top heuristics

@@ -270,9 +270,16 @@ class ConsoleCallback(BaseCallback):
         recent_wr = sum(self.recent_wins[-100:]) / len(self.recent_wins[-100:]) if len(self.recent_wins) >= 100 else sum(self.recent_wins) / len(self.recent_wins)
         avg_reward = sum(self.recent_rewards[-100:]) / len(self.recent_rewards[-100:]) if len(self.recent_rewards) >= 100 else sum(self.recent_rewards) / len(self.recent_rewards)
         
+        # Calculate phase progress
+        from src.rl.config import get_phase_config
+        phase_config = get_phase_config(self.trainer.current_phase)
+        max_episodes = phase_config['max_episodes']
+        phase_progress = (self.trainer.phase_episodes / max_episodes) * 100 if max_episodes > 0 else 0
+        
         # Create table
         table = Table(show_header=True, header_style="bold magenta", title=f"SARG RL Training - Phase {self.trainer.current_phase}")
         table.add_column("Episode", style="cyan", justify="right")
+        table.add_column("Phase", style="magenta", justify="right")
         table.add_column("Win Rate", style="yellow", justify="right")
         table.add_column("Best WR", style="green", justify="right")
         table.add_column("Avg Reward", style="blue", justify="right")
@@ -280,6 +287,7 @@ class ConsoleCallback(BaseCallback):
         
         table.add_row(
             f"{self.trainer.total_episodes:,}",
+            f"{phase_progress:.1f}%",
             f"{recent_wr:.1%}",
             f"{self.trainer.best_win_rate:.1%}",
             f"{avg_reward:+.1f}",

@@ -202,16 +202,9 @@ def main():
         
         # Train all phases from start_phase
         for phase in range(start_phase, 5):
-            trainer.current_phase = phase
-            trainer.phase_episodes = 0
-            
             # Get phase configuration
             from src.rl.config import get_phase_config
             phase_config = get_phase_config(phase, config)
-            
-            # Update environment opponent for new phase
-            trainer._update_opponent_for_phase(phase)
-            trainer.agent.env.set_opponent(opponent_id=trainer._get_current_opponent(phase_config))
             
             # Determine episode limits
             if args.episodes and phase == start_phase:
@@ -223,6 +216,47 @@ def main():
             min_episodes = phase_config['min_episodes']
             target_wr = phase_config.get('target_wr', None)
             
+            # When resuming the same phase, check if already complete
+            if phase == start_phase:
+                already_complete = False
+                
+                # Check if max episodes exceeded
+                if trainer.phase_episodes >= max_episodes:
+                    already_complete = True
+                    if not args.quiet:
+                        print(f"\nPhase {phase} already complete (max episodes reached)")
+                        print(f"  Episodes: {trainer.phase_episodes:,} / {max_episodes:,}")
+                        print(f"  Advancing to Phase {phase + 1}...\n")
+                
+                # Check if target met
+                elif target_wr and trainer.phase_episodes >= min_episodes and trainer.recent_win_rate >= target_wr:
+                    already_complete = True
+                    if not args.quiet:
+                        print(f"\nPhase {phase} already complete (target met)")
+                        print(f"  Episodes: {trainer.phase_episodes:,}")
+                        print(f"  Win rate: {trainer.recent_win_rate:.1%} / {target_wr:.1%}")
+                        print(f"  Advancing to Phase {phase + 1}...\n")
+                
+                if already_complete:
+                    # Save phase completion and advance
+                    trainer.phase_win_rates[phase] = trainer.recent_win_rate
+                    trainer._save_training_state()
+                    phase_path = Path(config['checkpoint_dir']) / f"rl_v1_phase{phase}_complete.zip"
+                    if not phase_path.exists():
+                        trainer.agent.save(phase_path)
+                    # Move to next phase
+                    trainer.current_phase = phase + 1
+                    trainer.phase_episodes = 0
+                    trainer._save_training_state()
+                    continue
+            
+            # Start/continue this phase
+            trainer.current_phase = phase
+            
+            # Update environment opponent for new phase
+            trainer._update_opponent_for_phase(phase)
+            trainer.agent.env.set_opponent(opponent_id=trainer._get_current_opponent(phase_config))
+            
             if not args.quiet:
                 print(f"\n{'='*70}")
                 print(f"PHASE {phase}: {trainer._get_phase_name(phase)}")
@@ -231,11 +265,13 @@ def main():
                 print(f"Max episodes: {max_episodes:,}")
                 if target_wr:
                     print(f"Target win rate: {target_wr:.1%}")
+                if phase == start_phase and trainer.phase_episodes > 0:
+                    print(f"Resuming from: {trainer.phase_episodes:,} episodes")
                 print()
             
             # Train this phase
-            phase_start_episode = trainer.total_episodes
-            episodes_trained = 0
+            phase_start_episode = trainer.total_episodes - trainer.phase_episodes
+            episodes_trained = trainer.phase_episodes
             
             while episodes_trained < max_episodes:
                 # Train in chunks of 50k timesteps
@@ -258,6 +294,14 @@ def main():
                             print(f"  Episodes: {episodes_trained:,}")
                             print(f"  Win rate: {trainer.recent_win_rate:.1%}")
                         break
+                
+                # Force progression if max episodes reached
+                if episodes_trained >= max_episodes:
+                    if not args.quiet:
+                        print(f"\n✓ Phase {phase} max episodes reached!")
+                        print(f"  Episodes: {episodes_trained:,}")
+                        print(f"  Win rate: {trainer.recent_win_rate:.1%}")
+                    break
                 
                 # Update opponent for variety (Phase 2-4)
                 if phase >= 2:
