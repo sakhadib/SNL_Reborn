@@ -1,0 +1,142 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-02-28T18:36:06.688502",
+  "ratings": {
+    "balanced_eval": {
+      "agent_id": "balanced_eval",
+      "rating": 1645.771135702896,
+      "games_played": 3359972,
+      "wins": 2461273,
+      "losses": 898699,
+      "total_margin": 61820332,
+      "last_updated": "2026-02-28T18:36:06.591207"
+    },
+    "anti_capture": {
+      "agent_id": "anti_capture",
+      "rating": 1387.0456451364635,
+      "games_played": 3359972,
+      "wins": 1272185,
+      "losses": 2087787,
+      "total_margin": -30950670,
+      "last_updated": "2026-02-28T18:36:06.574796"
+    },
+    "exactor": {
+      "agent_id": "exactor",
+      "rating": 1460.0282392471604,
+      "games_played": 3359972,
+      "wins": 1266650,
+      "losses": 2093322,
+      "total_margin": -33092234,
+      "last_updated": "2026-02-28T18:36:06.607172"
+    },
+    "grape_seeker": {
+      "agent_id": "grape_seeker",
+      "rating": 1479.3142669362785,
+      "games_played": 3359972,
+      "wins": 1865761,
+      "losses": 1494211,
+      "total_margin": 16794664,
+      "last_updated": "2026-02-28T18:36:06.620742"
+    },
+    "hunter": {
+      "agent_id": "hunter",
+      "rating": 1444.984327211815,
+      "games_played": 3359972,
+      "wins": 1322818,
+      "losses": 2037154,
+      "total_margin": -28890056,
+      "last_updated": "2026-02-28T18:36:06.634322"
+    },
+    "immune_aggressor": {
+      "agent_id": "immune_aggressor",
+      "rating": 1510.4468398784277,
+      "games_played": 3359972,
+      "wins": 1882976,
+      "losses": 1476996,
+      "total_margin": 17671989,
+      "last_updated": "2026-02-28T18:36:06.644751"
+    },
+    "maxim": {
+      "agent_id": "maxim",
+      "rating": 1367.9609920865735,
+      "games_played": 3359972,
+      "wins": 1267263,
+      "losses": 2092709,
+      "total_margin": -33076590,
+      "last_updated": "2026-02-28T18:36:06.655174"
+    },
+    "minim": {
+      "agent_id": "minim",
+      "rating": 1056.79858489577,
+      "games_played": 3359972,
+      "wins": 363052,
+      "losses": 2996920,
+      "total_margin": -112187283,
+      "last_updated": "2026-02-28T18:36:06.663605"
+    },
+    "risk_averse": {
+      "agent_id": "risk_averse",
+      "rating": 1804.1598697663142,
+      "games_played": 3359972,
+      "wins": 2539999,
+      "losses": 819973,
+      "total_margin": 68493330,
+      "last_updated": "2026-02-28T18:36:06.670708"
+    },
+    "risk_seeker": {
+      "agent_id": "risk_seeker",
+      "rating": 1812.6276965563118,
+      "games_played": 3359972,
+      "wins": 2365318,
+      "losses": 994654,
+      "total_margin": 54536442,
+      "last_updated": "2026-02-28T18:36:06.676427"
+    },
+    "safe_hunter": {
+      "agent_id": "safe_hunter",
+      "rating": 1546.6547519308713,
+      "games_played": 3359972,
+      "wins": 1904461,
+      "losses": 1455511,
+      "total_margin": 19444141,
+      "last_updated": "2026-02-28T18:36:06.681191"
+    },
+    "safe_preferrer": {
+      "agent_id": "safe_preferrer",
+      "rating": 1525.9095128003219,
+      "games_played": 3359972,
+      "wins": 1822276,
+      "losses": 1537696,
+      "total_margin": 13691405,
+      "last_updated": "2026-02-28T18:36:06.684854"
+    },
+    "scorpion_avoider": {
+      "agent_id": "scorpion_avoider",
+      "rating": 1417.8301839708922,
+      "games_played": 3359972,
+      "wins": 1510424,
+      "losses": 1849548,
+      "total_margin": -14533675,
+      "last_updated": "2026-02-28T18:36:06.687046"
+    },
+    "snake_avoider": {
+      "agent_id": "snake_avoider",
+      "rating": 1554.1878449407916,
+      "games_played": 3359972,
+      "wins": 1869850,
+      "losses": 1490122,
+      "total_margin": 16849187,
+      "last_updated": "2026-02-28T18:36:06.688400"
+    },
+    "stun_exploiter": {
+      "agent_id": "stun_exploiter",
+      "rating": 1486.280108939044,
+      "games_played": 3359972,
+      "wins": 1485484,
+      "losses": 1874488,
+      "total_margin": -16570982,
+      "last_updated": "2026-02-28T18:36:06.688403"
+    }
+  },
+  "history_length": 0
+}

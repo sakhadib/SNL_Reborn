@@ -1,0 +1,10 @@
+{
+  "total_episodes": 0,
+  "current_phase": 1,
+  "phase_episodes": 0,
+  "best_win_rate": 0.0,
+  "recent_win_rate": 0.0,
+  "phase_win_rates": {},
+  "last_checkpoint": "2026-03-01T01:48:13.577959",
+  "snapshots": []
+}

@@ -162,13 +162,13 @@ def run_simulation(
     rating_tracker = RatingTracker(rating_file)
     initial_ratings = rating_tracker.get_all_ratings()
     rating_history = [initial_ratings.copy()]
-     with progress bar
+    
+    # Run tournaments with progress bar
     tournaments_iterator = range(1, num_tournaments + 1)
     if not verbose:
         tournaments_iterator = tqdm(tournaments_iterator, desc="Tournaments", unit="tournament")
     
-    for tournament_num in tournaments_iterator
-    for tournament_num in range(1, num_tournaments + 1):
+    for tournament_num in tournaments_iterator:
         if verbose:
             print_tournament_separator(tournament_num, num_tournaments)
         
@@ -211,15 +211,15 @@ def run_simulation(
         
         # Print mini summary after each tournament
         if verbose and num_tournaments > 1:
+            print(f"\nAfter Tournament {tournament_num}:")
+            top_3 = rating_tracker.get_leaderboard()[:3]
+            for rank, (agent_id, rating, games, wins, losses, win_rate) in enumerate(top_3, 1):
+                print(f"  {rank}. {agent_id}: {rating:.1f}")
         
         # Update progress bar with current top agent
         if not verbose and hasattr(tournaments_iterator, 'set_postfix'):
             top_agent = rating_tracker.get_leaderboard()[0]
             tournaments_iterator.set_postfix(leader=f"{top_agent[0]} ({top_agent[1]:.0f})")
-            print(f"\nAfter Tournament {tournament_num}:")
-            top_3 = rating_tracker.get_leaderboard()[:3]
-            for rank, (agent_id, rating, games, wins, losses, win_rate) in enumerate(top_3, 1):
-                print(f"  {rank}. {agent_id}: {rating:.1f}")
     
     # Print final summary
     if verbose:

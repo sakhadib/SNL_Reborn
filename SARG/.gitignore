@@ -48,6 +48,7 @@ htmlcov/
 # Data files (except configs)
 data/games/*.sarg
 data/games/*.idx
+data/games/*.bin
 data/logs/*
 data/models/*.pt
 data/models/*.pth
@@ -70,5 +71,7 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.bak
-*.swp
-*~
+*.
+.bin
+
+*.zip
