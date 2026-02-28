@@ -13,6 +13,7 @@ from src.rl.environment import SARGEnv
 from src.rl.rl_agent import RLAgent
 from src.agents import AGENT_REGISTRY
 from src.engine import Player
+from src.evaluation.elo_rating import EloRating, GameResult
 
 
 class Evaluator:
@@ -82,8 +83,38 @@ class Evaluator:
         
         overall_win_rate = total_wins / total_games if total_games > 0 else 0.0
         
+        # Calculate estimated Elo rating (starting from 1500)
+        elo_system = EloRating(k_factor=24.0, alpha=0.75)
+        rl_rating = 1500.0
+        
+        for opponent_id, result in results.items():
+            opponent_rating = 1500.0  # Assume baseline rating
+            wins = result["wins"]
+            losses = result["losses"]
+            avg_margin = result["avg_margin"]
+            
+            # Update Elo based on each game result (approximate using average margin)
+            for _ in range(wins):
+                game_result = GameResult(
+                    winner_id="rl_agent",
+                    loser_id=opponent_id,
+                    loser_final_position=int(100 - avg_margin),
+                    num_turns=0
+                )
+                rl_rating, opponent_rating = elo_system.update_ratings(rl_rating, opponent_rating, game_result)
+                
+            for _ in range(losses):
+                game_result = GameResult(
+                    winner_id=opponent_id,
+                    loser_id="rl_agent",
+                    loser_final_position=int(100 - avg_margin),
+                    num_turns=0
+                )
+                opponent_rating, rl_rating = elo_system.update_ratings(opponent_rating, rl_rating, game_result)
+        
         print()
         print(f"Overall: {total_wins}/{total_games} ({overall_win_rate:.1%})")
+        print(f"Estimated Elo Rating: {rl_rating:.0f}")
         print(f"{'='*70}\n")
         
         # Compile evaluation report
@@ -95,6 +126,7 @@ class Evaluator:
             "overall_win_rate": overall_win_rate,
             "total_wins": total_wins,
             "total_games": total_games,
+            "estimated_elo": rl_rating,
         }
         
         # Save evaluation report

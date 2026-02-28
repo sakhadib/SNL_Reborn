@@ -4,10 +4,19 @@ Handles checkpointing, evaluation, and monitoring during training.
 """
 
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from stable_baselines3.common.callbacks import BaseCallback
+from rich.console import Console
+from rich.table import Table
+from rich.live import Live
+from rich.layout import Layout
+from rich.panel import Panel
+from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn, TimeElapsedColumn
+import sys
 
 from src.rl.evaluator import Evaluator
+
+console = Console()
 
 
 class CheckpointCallback(BaseCallback):
@@ -53,6 +62,11 @@ class CheckpointCallback(BaseCallback):
         # Check if episode just finished
         if self.locals.get('dones', [False])[0]:
             self.episode_count += 1
+            
+            # Update trainer episode count
+            if self.trainer:
+                self.trainer.total_episodes += 1
+                self.trainer.phase_episodes += 1
             
             # Save checkpoint
             if self.episode_count % self.checkpoint_freq == 0:
@@ -133,9 +147,13 @@ class EvaluationCallback(BaseCallback):
     def _run_evaluation(self):
         """Run evaluation against all heuristics."""
         from src.rl.rl_agent import RLAgent
+        from src.rl.environment import SARGEnv
+        
+        # Create temporary env for agent
+        temp_env = SARGEnv(opponent=None, config=self.trainer.config if self.trainer else {})
         
         # Wrap model in RLAgent for evaluation
-        agent = RLAgent(env=None, config={})
+        agent = RLAgent(env=temp_env, config={})
         agent.model = self.model
         
         # Get current phase
@@ -152,7 +170,7 @@ class EvaluationCallback(BaseCallback):
 
 class ConsoleCallback(BaseCallback):
     """
-    Callback for console logging and progress tracking.
+    Callback for console logging with in-place updating rich display.
     """
     
     def __init__(
@@ -165,7 +183,7 @@ class ConsoleCallback(BaseCallback):
         Initialize console callback.
         
         Args:
-            log_freq: Log to console every N episodes
+            log_freq: Update display every N timesteps
             trainer: CurriculumTrainer instance
             verbose: Verbosity level
         """
@@ -176,6 +194,22 @@ class ConsoleCallback(BaseCallback):
         self.episode_count = 0
         self.last_episode_reward = 0
         self.last_episode_length = 0
+        self.recent_rewards = []
+        self.recent_wins = []
+        self.live: Optional[Live] = None
+        self.steps_since_log = 0
+        
+    def _on_training_start(self) -> None:
+        """Start the rich Live display."""
+        if self.verbose > 0:
+            self.live = Live(console=console, refresh_per_second=4, screen=False)
+            self.live.start()
+    
+    def _on_training_end(self) -> None:
+        """Stop the rich Live display."""
+        if self.live:
+            self.live.stop()
+            self.live = None
     
     def _on_step(self) -> bool:
         """
@@ -184,30 +218,72 @@ class ConsoleCallback(BaseCallback):
         Returns:
             True to continue training
         """
+        self.steps_since_log += 1
+        
         # Check if episode just finished
         if self.locals.get('dones', [False])[0]:
             self.episode_count += 1
             
+            # Update trainer episode count
+            if self.trainer:
+                self.trainer.total_episodes += 1
+                self.trainer.phase_episodes += 1
+            
             # Get episode info
             infos = self.locals.get('infos', [{}])
             if len(infos) > 0:
-                self.last_episode_reward = infos[0].get('episode_reward', 0)
-                self.last_episode_length = infos[0].get('episode_length', 0)
-            
-            # Log to console
-            if self.episode_count % self.log_freq == 0 and self.verbose > 0:
-                self._log_progress()
+                self.last_episode_reward = infos[0].get('episode', {}).get('r', 0)
+                self.last_episode_length = infos[0].get('episode', {}).get('l', 0)
+                
+                # Track wins
+                won = self.last_episode_reward > 0
+                self.recent_wins.append(won)
+                self.recent_rewards.append(self.last_episode_reward)
+                
+                # Keep window size
+                if len(self.recent_wins) > 1000:
+                    self.recent_wins = self.recent_wins[-1000:]
+                    self.recent_rewards = self.recent_rewards[-1000:]
+                
+                # Update trainer win rate
+                if self.trainer and len(self.recent_wins) > 0:
+                    self.trainer.recent_win_rate = sum(self.recent_wins) / len(self.recent_wins)
+                    if self.trainer.recent_win_rate > self.trainer.best_win_rate:
+                        self.trainer.best_win_rate = self.trainer.recent_win_rate
+        
+        # Update display periodically
+        if self.steps_since_log >= self.log_freq and self.verbose > 0:
+            self._update_display()
+            self.steps_since_log = 0
         
         return True
     
-    def _log_progress(self):
-        """Log training progress to console."""
-        if self.trainer:
-            summary = self.trainer.get_training_summary()
-            
-            print(f"Episode {summary['total_episodes']:,} | "
-                  f"Phase {summary['current_phase']} | "
-                  f"WR: {summary['recent_win_rate']:.1%} | "
-                  f"Best: {summary['best_win_rate']:.1%} | "
-                  f"Reward: {self.last_episode_reward:+.1f} | "
-                  f"Length: {self.last_episode_length}")
+    def _update_display(self):
+        """Update the live display with current progress."""
+        if not self.live or not self.trainer:
+            return
+        
+        if len(self.recent_wins) < 10:
+            # Not enough data yet
+            return
+        
+        recent_wr = sum(self.recent_wins[-100:]) / len(self.recent_wins[-100:]) if len(self.recent_wins) >= 100 else sum(self.recent_wins) / len(self.recent_wins)
+        avg_reward = sum(self.recent_rewards[-100:]) / len(self.recent_rewards[-100:]) if len(self.recent_rewards) >= 100 else sum(self.recent_rewards) / len(self.recent_rewards)
+        
+        # Create table
+        table = Table(show_header=True, header_style="bold magenta", title=f"SARG RL Training - Phase {self.trainer.current_phase}")
+        table.add_column("Episode", style="cyan", justify="right")
+        table.add_column("Win Rate", style="yellow", justify="right")
+        table.add_column("Best WR", style="green", justify="right")
+        table.add_column("Avg Reward", style="blue", justify="right")
+        table.add_column("Ep Length", style="white", justify="right")
+        
+        table.add_row(
+            f"{self.trainer.total_episodes:,}",
+            f"{recent_wr:.1%}",
+            f"{self.trainer.best_win_rate:.1%}",
+            f"{avg_reward:+.1f}",
+            f"{self.last_episode_length:.0f}"
+        )
+        
+        self.live.update(table)

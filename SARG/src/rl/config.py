@@ -29,16 +29,16 @@ DEFAULT_CONFIG: Dict[str, Any] = {
     "target_kl": None,         # No early stopping
     
     # ==================== Reward Structure ====================
-    "win_base_reward": 100.0,
-    "loss_base_reward": -100.0,
-    "margin_alpha": 0.75,      # Margin sensitivity (same as Elo)
-    "step_penalty": 0.1,       # Per-turn penalty
+    "win_base_reward": 10.0,      # Reduced from 100 to 10 for stable learning
+    "loss_base_reward": -10.0,    # Reduced from -100 to -10
+    "margin_alpha": 0.75,         # Margin sensitivity (same as Elo)
+    "step_penalty": 0.01,         # Reduced from 0.1 to 0.01
     
     # ==================== Curriculum Training ====================
     # Phase 1: Random Opponent
-    "phase_1_min_episodes": 500000,
+    "phase_1_min_episodes": 150000,  # Lower threshold to avoid saturation
     "phase_1_max_episodes": 1000000,
-    "phase_1_target_wr": 0.80,
+    "phase_1_target_wr": 0.90,  # Higher threshold for stable progression
     
     # Phase 2: Weak Heuristics (MAXIM, MINIM, EXACTOR)
     "phase_2_min_episodes": 500000,

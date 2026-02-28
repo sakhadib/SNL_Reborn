@@ -63,11 +63,11 @@ class SARGEnv(gym.Env):
         # RL player assignment (randomly assigned each episode)
         self.rl_player = Player.A
         
-        # Observation space: [self_pos, self_stun, self_immune, opp_pos, opp_stun, opp_immune]
+        # Observation space: [self_pos, self_stun, self_immune, opp_pos, opp_stun, opp_immune, dice1, dice2]
         self.observation_space = spaces.Box(
             low=0.0,
             high=1.0,
-            shape=(6,),
+            shape=(8,),
             dtype=np.float32
         )
         
@@ -244,6 +244,8 @@ class SARGEnv(gym.Env):
                 self.state.b_position / 100.0,
                 self.state.b_stun / 3.0,
                 self.state.b_immunity / 3.0,
+                self.dice1 / 6.0,
+                self.dice2 / 6.0,
             ], dtype=np.float32)
         else:
             observation = np.array([
@@ -253,6 +255,8 @@ class SARGEnv(gym.Env):
                 self.state.a_position / 100.0,
                 self.state.a_stun / 3.0,
                 self.state.a_immunity / 3.0,
+                self.dice1 / 6.0,
+                self.dice2 / 6.0,
             ], dtype=np.float32)
         
         return observation

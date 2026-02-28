@@ -75,7 +75,7 @@ class RLAgent:
             max_grad_norm=self.config.get("max_grad_norm", 0.5),
             target_kl=self.config.get("target_kl", None),
             policy_kwargs=policy_kwargs,
-            verbose=self.config.get("verbose", 1),
+            verbose=0,  # Disable SB3 verbose output (we use custom console callback)
             tensorboard_log=None,  # Disable tensorboard for now
             seed=self.config.get("seed", None)
         )
