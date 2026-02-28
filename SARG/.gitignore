@@ -58,8 +58,8 @@ data/models/*.pth
 !data/models/.gitkeep
 
 # RL Training - Large model files (share via cloud storage)
-data/rl_checkpoints/*.zip
-data/rl_checkpoints/snapshots/*.zip
+# data/rl_checkpoints/*.zip
+# data/rl_checkpoints/snapshots/*.zip
 
 # RL Training - Keep these small tracking files (commit to git)
 !data/rl_checkpoints/training_state.json
