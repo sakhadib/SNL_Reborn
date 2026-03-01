@@ -112,12 +112,20 @@ def main():
         default=42,
         help='Random seed'
     )
+    parser.add_argument(
+        '--device',
+        type=str,
+        choices=['auto', 'cpu', 'cuda'],
+        default='auto',
+        help='Training device: auto, cpu, or cuda'
+    )
     
     args = parser.parse_args()
     
     # Build configuration with overrides
     config_overrides = {
         'seed': args.seed,
+        'device': args.device,
         'checkpoint_dir': args.checkpoint_dir,
         'log_dir': args.log_dir,
         'verbose': 0 if args.quiet else 1,
@@ -149,6 +157,7 @@ def main():
         print(f"Starting phase: {args.phase}")
         print(f"Resume: {args.resume}")
         print(f"Seed: {args.seed}")
+        print(f"Device: {config['device']}")
         print(f"Learning rate: {config['learning_rate']}")
         print(f"Batch size: {config['batch_size']}")
         print(f"Checkpoint freq: {config['checkpoint_freq']:,} episodes")

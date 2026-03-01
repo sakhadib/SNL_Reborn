@@ -1,0 +1,101 @@
+{
+  "episode": 150000,
+  "phase": 3,
+  "timestamp": "2026-03-01T06:34:35.155924",
+  "results": {
+    "maxim": {
+      "wins": 48,
+      "losses": 52,
+      "win_rate": 0.48,
+      "avg_margin": 0.26
+    },
+    "minim": {
+      "wins": 84,
+      "losses": 16,
+      "win_rate": 0.84,
+      "avg_margin": 29.42
+    },
+    "exactor": {
+      "wins": 45,
+      "losses": 55,
+      "win_rate": 0.45,
+      "avg_margin": -1.67
+    },
+    "snake_avoider": {
+      "wins": 31,
+      "losses": 69,
+      "win_rate": 0.31,
+      "avg_margin": -16.37
+    },
+    "scorpion_avoider": {
+      "wins": 38,
+      "losses": 62,
+      "win_rate": 0.38,
+      "avg_margin": -7.53
+    },
+    "safe_preferrer": {
+      "wins": 33,
+      "losses": 67,
+      "win_rate": 0.33,
+      "avg_margin": -13.37
+    },
+    "hunter": {
+      "wins": 49,
+      "losses": 51,
+      "win_rate": 0.49,
+      "avg_margin": 0.8
+    },
+    "safe_hunter": {
+      "wins": 37,
+      "losses": 63,
+      "win_rate": 0.37,
+      "avg_margin": -13.97
+    },
+    "anti_capture": {
+      "wins": 48,
+      "losses": 52,
+      "win_rate": 0.48,
+      "avg_margin": -3.36
+    },
+    "grape_seeker": {
+      "wins": 32,
+      "losses": 68,
+      "win_rate": 0.32,
+      "avg_margin": -15.53
+    },
+    "immune_aggressor": {
+      "wins": 35,
+      "losses": 65,
+      "win_rate": 0.35,
+      "avg_margin": -12.24
+    },
+    "stun_exploiter": {
+      "wins": 51,
+      "losses": 49,
+      "win_rate": 0.51,
+      "avg_margin": -1.47
+    },
+    "balanced_eval": {
+      "wins": 17,
+      "losses": 83,
+      "win_rate": 0.17,
+      "avg_margin": -27.29
+    },
+    "risk_seeker": {
+      "wins": 22,
+      "losses": 78,
+      "win_rate": 0.22,
+      "avg_margin": -21.86
+    },
+    "risk_averse": {
+      "wins": 16,
+      "losses": 84,
+      "win_rate": 0.16,
+      "avg_margin": -29.08
+    }
+  },
+  "overall_win_rate": 0.39066666666666666,
+  "total_wins": 586,
+  "total_games": 1500,
+  "estimated_elo": 1024.6597191495925
+}

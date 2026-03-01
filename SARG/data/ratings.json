@@ -1,141 +1,141 @@
 {
   "version": "1.0",
-  "last_updated": "2026-02-28T18:36:06.688502",
+  "last_updated": "2026-03-01T04:40:09.027527",
   "ratings": {
     "balanced_eval": {
       "agent_id": "balanced_eval",
-      "rating": 1645.771135702896,
-      "games_played": 3359972,
-      "wins": 2461273,
-      "losses": 898699,
-      "total_margin": 61820332,
-      "last_updated": "2026-02-28T18:36:06.591207"
+      "rating": 1663.897919369057,
+      "games_played": 5230652,
+      "wins": 3832091,
+      "losses": 1398561,
+      "total_margin": 96259094,
+      "last_updated": "2026-03-01T04:40:08.909951"
     },
     "anti_capture": {
       "agent_id": "anti_capture",
-      "rating": 1387.0456451364635,
-      "games_played": 3359972,
-      "wins": 1272185,
-      "losses": 2087787,
-      "total_margin": -30950670,
-      "last_updated": "2026-02-28T18:36:06.574796"
+      "rating": 1330.1355978873328,
+      "games_played": 5230652,
+      "wins": 1980836,
+      "losses": 3249816,
+      "total_margin": -48134394,
+      "last_updated": "2026-03-01T04:40:08.893467"
     },
     "exactor": {
       "agent_id": "exactor",
-      "rating": 1460.0282392471604,
-      "games_played": 3359972,
-      "wins": 1266650,
-      "losses": 2093322,
-      "total_margin": -33092234,
-      "last_updated": "2026-02-28T18:36:06.607172"
+      "rating": 1404.2480406799368,
+      "games_played": 5230652,
+      "wins": 1971574,
+      "losses": 3259078,
+      "total_margin": -51519420,
+      "last_updated": "2026-03-01T04:40:08.929384"
     },
     "grape_seeker": {
       "agent_id": "grape_seeker",
-      "rating": 1479.3142669362785,
-      "games_played": 3359972,
-      "wins": 1865761,
-      "losses": 1494211,
-      "total_margin": 16794664,
-      "last_updated": "2026-02-28T18:36:06.620742"
+      "rating": 1622.0643549560707,
+      "games_played": 5230652,
+      "wins": 2904790,
+      "losses": 2325862,
+      "total_margin": 26164025,
+      "last_updated": "2026-03-01T04:40:08.945664"
     },
     "hunter": {
       "agent_id": "hunter",
-      "rating": 1444.984327211815,
-      "games_played": 3359972,
-      "wins": 1322818,
-      "losses": 2037154,
-      "total_margin": -28890056,
-      "last_updated": "2026-02-28T18:36:06.634322"
+      "rating": 1412.3322400674888,
+      "games_played": 5230652,
+      "wins": 2059490,
+      "losses": 3171162,
+      "total_margin": -44986194,
+      "last_updated": "2026-03-01T04:40:08.961394"
     },
     "immune_aggressor": {
       "agent_id": "immune_aggressor",
-      "rating": 1510.4468398784277,
-      "games_played": 3359972,
-      "wins": 1882976,
-      "losses": 1476996,
-      "total_margin": 17671989,
-      "last_updated": "2026-02-28T18:36:06.644751"
+      "rating": 1573.8463109634547,
+      "games_played": 5230652,
+      "wins": 2931125,
+      "losses": 2299527,
+      "total_margin": 27490441,
+      "last_updated": "2026-03-01T04:40:08.974087"
     },
     "maxim": {
       "agent_id": "maxim",
-      "rating": 1367.9609920865735,
-      "games_played": 3359972,
-      "wins": 1267263,
-      "losses": 2092709,
-      "total_margin": -33076590,
-      "last_updated": "2026-02-28T18:36:06.655174"
+      "rating": 1452.7045187937208,
+      "games_played": 5230652,
+      "wins": 1972850,
+      "losses": 3257802,
+      "total_margin": -51478548,
+      "last_updated": "2026-03-01T04:40:08.984655"
     },
     "minim": {
       "agent_id": "minim",
-      "rating": 1056.79858489577,
-      "games_played": 3359972,
-      "wins": 363052,
-      "losses": 2996920,
-      "total_margin": -112187283,
-      "last_updated": "2026-02-28T18:36:06.663605"
+      "rating": 1144.3109452741144,
+      "games_played": 5230652,
+      "wins": 565086,
+      "losses": 4665566,
+      "total_margin": -174675161,
+      "last_updated": "2026-03-01T04:40:08.996285"
     },
     "risk_averse": {
       "agent_id": "risk_averse",
-      "rating": 1804.1598697663142,
-      "games_played": 3359972,
-      "wins": 2539999,
-      "losses": 819973,
-      "total_margin": 68493330,
-      "last_updated": "2026-02-28T18:36:06.670708"
+      "rating": 1731.1308730046865,
+      "games_played": 5230652,
+      "wins": 3954141,
+      "losses": 1276511,
+      "total_margin": 106607116,
+      "last_updated": "2026-03-01T04:40:09.004248"
     },
     "risk_seeker": {
       "agent_id": "risk_seeker",
-      "rating": 1812.6276965563118,
-      "games_played": 3359972,
-      "wins": 2365318,
-      "losses": 994654,
-      "total_margin": 54536442,
-      "last_updated": "2026-02-28T18:36:06.676427"
+      "rating": 1681.5549638022235,
+      "games_played": 5230652,
+      "wins": 3681890,
+      "losses": 1548762,
+      "total_margin": 84877608,
+      "last_updated": "2026-03-01T04:40:09.010451"
     },
     "safe_hunter": {
       "agent_id": "safe_hunter",
-      "rating": 1546.6547519308713,
-      "games_played": 3359972,
-      "wins": 1904461,
-      "losses": 1455511,
-      "total_margin": 19444141,
-      "last_updated": "2026-02-28T18:36:06.681191"
+      "rating": 1583.6629748253247,
+      "games_played": 5230652,
+      "wins": 2964280,
+      "losses": 2266372,
+      "total_margin": 30237114,
+      "last_updated": "2026-03-01T04:40:09.017841"
     },
     "safe_preferrer": {
       "agent_id": "safe_preferrer",
-      "rating": 1525.9095128003219,
-      "games_played": 3359972,
-      "wins": 1822276,
-      "losses": 1537696,
-      "total_margin": 13691405,
-      "last_updated": "2026-02-28T18:36:06.684854"
+      "rating": 1568.0396788082128,
+      "games_played": 5230652,
+      "wins": 2835998,
+      "losses": 2394654,
+      "total_margin": 21266139,
+      "last_updated": "2026-03-01T04:40:09.023089"
     },
     "scorpion_avoider": {
       "agent_id": "scorpion_avoider",
-      "rating": 1417.8301839708922,
-      "games_played": 3359972,
-      "wins": 1510424,
-      "losses": 1849548,
-      "total_margin": -14533675,
-      "last_updated": "2026-02-28T18:36:06.687046"
+      "rating": 1361.457289022868,
+      "games_played": 5230652,
+      "wins": 2351599,
+      "losses": 2879053,
+      "total_margin": -22599095,
+      "last_updated": "2026-03-01T04:40:09.026176"
     },
     "snake_avoider": {
       "agent_id": "snake_avoider",
-      "rating": 1554.1878449407916,
-      "games_played": 3359972,
-      "wins": 1869850,
-      "losses": 1490122,
-      "total_margin": 16849187,
-      "last_updated": "2026-02-28T18:36:06.688400"
+      "rating": 1524.7703020639922,
+      "games_played": 5230652,
+      "wins": 2911373,
+      "losses": 2319279,
+      "total_margin": 26249582,
+      "last_updated": "2026-03-01T04:40:09.027403"
     },
     "stun_exploiter": {
       "agent_id": "stun_exploiter",
-      "rating": 1486.280108939044,
-      "games_played": 3359972,
-      "wins": 1485484,
-      "losses": 1874488,
-      "total_margin": -16570982,
-      "last_updated": "2026-02-28T18:36:06.688403"
+      "rating": 1445.8439904814263,
+      "games_played": 5230652,
+      "wins": 2312767,
+      "losses": 2917885,
+      "total_margin": -25758307,
+      "last_updated": "2026-03-01T04:40:09.027406"
     }
   },
   "history_length": 0

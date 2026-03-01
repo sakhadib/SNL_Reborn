@@ -1,101 +1,101 @@
 {
   "episode": 50000,
-  "phase": 1,
-  "timestamp": "2026-03-01T03:02:35.921415",
+  "phase": 2,
+  "timestamp": "2026-03-01T06:02:15.089268",
   "results": {
     "maxim": {
       "wins": 49,
       "losses": 51,
       "win_rate": 0.49,
-      "avg_margin": -1.49
+      "avg_margin": -2.23
     },
     "minim": {
-      "wins": 87,
-      "losses": 13,
-      "win_rate": 0.87,
-      "avg_margin": 26.14
+      "wins": 88,
+      "losses": 12,
+      "win_rate": 0.88,
+      "avg_margin": 27.0
     },
     "exactor": {
+      "wins": 55,
+      "losses": 45,
+      "win_rate": 0.55,
+      "avg_margin": 1.11
+    },
+    "snake_avoider": {
+      "wins": 25,
+      "losses": 75,
+      "win_rate": 0.25,
+      "avg_margin": -16.62
+    },
+    "scorpion_avoider": {
+      "wins": 49,
+      "losses": 51,
+      "win_rate": 0.49,
+      "avg_margin": -1.9
+    },
+    "safe_preferrer": {
+      "wins": 27,
+      "losses": 73,
+      "win_rate": 0.27,
+      "avg_margin": -15.27
+    },
+    "hunter": {
       "wins": 48,
       "losses": 52,
       "win_rate": 0.48,
-      "avg_margin": -0.73
-    },
-    "snake_avoider": {
-      "wins": 28,
-      "losses": 72,
-      "win_rate": 0.28,
-      "avg_margin": -12.18
-    },
-    "scorpion_avoider": {
-      "wins": 41,
-      "losses": 59,
-      "win_rate": 0.41,
-      "avg_margin": -5.01
-    },
-    "safe_preferrer": {
-      "wins": 34,
-      "losses": 66,
-      "win_rate": 0.34,
-      "avg_margin": -16.84
-    },
-    "hunter": {
-      "wins": 47,
-      "losses": 53,
-      "win_rate": 0.47,
-      "avg_margin": 0.08
+      "avg_margin": 0.39
     },
     "safe_hunter": {
-      "wins": 28,
-      "losses": 72,
-      "win_rate": 0.28,
-      "avg_margin": -15.16
+      "wins": 31,
+      "losses": 69,
+      "win_rate": 0.31,
+      "avg_margin": -15.78
     },
     "anti_capture": {
-      "wins": 51,
-      "losses": 49,
-      "win_rate": 0.51,
-      "avg_margin": 2.65
+      "wins": 48,
+      "losses": 52,
+      "win_rate": 0.48,
+      "avg_margin": 2.14
     },
     "grape_seeker": {
+      "wins": 31,
+      "losses": 69,
+      "win_rate": 0.31,
+      "avg_margin": -15.93
+    },
+    "immune_aggressor": {
       "wins": 34,
       "losses": 66,
       "win_rate": 0.34,
-      "avg_margin": -15.61
-    },
-    "immune_aggressor": {
-      "wins": 29,
-      "losses": 71,
-      "win_rate": 0.29,
-      "avg_margin": -15.42
+      "avg_margin": -11.83
     },
     "stun_exploiter": {
-      "wins": 37,
-      "losses": 63,
-      "win_rate": 0.37,
-      "avg_margin": -8.77
+      "wins": 43,
+      "losses": 57,
+      "win_rate": 0.43,
+      "avg_margin": -4.52
     },
     "balanced_eval": {
+      "wins": 22,
+      "losses": 78,
+      "win_rate": 0.22,
+      "avg_margin": -25.67
+    },
+    "risk_seeker": {
       "wins": 18,
       "losses": 82,
       "win_rate": 0.18,
-      "avg_margin": -28.33
-    },
-    "risk_seeker": {
-      "wins": 30,
-      "losses": 70,
-      "win_rate": 0.3,
-      "avg_margin": -19.81
+      "avg_margin": -28.87
     },
     "risk_averse": {
-      "wins": 11,
-      "losses": 89,
-      "win_rate": 0.11,
-      "avg_margin": -31.58
+      "wins": 21,
+      "losses": 79,
+      "win_rate": 0.21,
+      "avg_margin": -26.16
     }
   },
-  "overall_win_rate": 0.38133333333333336,
-  "total_wins": 572,
+  "overall_win_rate": 0.39266666666666666,
+  "total_wins": 589,
   "total_games": 1500,
-  "estimated_elo": 1017.3029368864057
+  "estimated_elo": 1030.722668714584
 }

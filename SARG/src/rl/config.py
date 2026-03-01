@@ -59,7 +59,7 @@ DEFAULT_CONFIG: Dict[str, Any] = {
     "phase_4_snapshot_pool_size": 5,     # Keep last N snapshots
     "phase_4_self_play_ratio": 0.7,     # 70% vs snapshots, 30% vs top heuristics
     "phase_4_top_heuristics": ["risk_seeker", "risk_averse", "balanced_eval", 
-                                "snake_avoider", "opportunistic"],
+                                "snake_avoider", "stun_exploiter"],
     
     # ==================== Checkpointing ====================
     "checkpoint_freq": 10000,           # Save checkpoint every N episodes
@@ -84,6 +84,7 @@ DEFAULT_CONFIG: Dict[str, Any] = {
     "deterministic_eval": True,         # Use deterministic policy during eval
     
     # ==================== Performance ====================
+    "device": "auto",                 # auto, cpu, or cuda
     "n_envs": 1,                        # Number of parallel environments (1 for simplicity)
     "verbose": 1,                       # SB3 verbosity level
 }

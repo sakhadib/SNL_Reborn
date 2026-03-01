@@ -37,6 +37,7 @@ class RLAgent:
         self.config = config or {}
         self.env = env
         self.model = None
+        self.device = self._resolve_device()
         
         if model_path is not None and Path(model_path).exists():
             self.load(model_path)
@@ -77,8 +78,64 @@ class RLAgent:
             policy_kwargs=policy_kwargs,
             verbose=0,  # Disable SB3 verbose output (we use custom console callback)
             tensorboard_log=None,  # Disable tensorboard for now
-            seed=self.config.get("seed", None)
+            seed=self.config.get("seed", None),
+            device=self.device,
         )
+
+    def _resolve_device(self) -> str:
+        """
+        Resolve compute device from config with CUDA compatibility checks.
+
+        Returns:
+            Device string accepted by SB3/PyTorch ("cpu" or "cuda")
+        """
+        requested = str(self.config.get("device", "auto")).lower()
+
+        if requested == "cpu":
+            return "cpu"
+
+        cuda_usable = self._is_cuda_usable()
+
+        if requested == "cuda":
+            if cuda_usable:
+                return "cuda"
+            print("Warning: CUDA requested but not usable on this machine. Falling back to CPU.")
+            return "cpu"
+
+        # Auto mode: use CUDA only when truly compatible
+        if cuda_usable:
+            return "cuda"
+        return "cpu"
+
+    def _is_cuda_usable(self) -> bool:
+        """
+        Check whether CUDA is available and compatible with this PyTorch build.
+
+        Returns:
+            True if CUDA can be safely used, False otherwise.
+        """
+        if not torch.cuda.is_available():
+            return False
+
+        try:
+            major, minor = torch.cuda.get_device_capability(0)
+            device_arch = f"sm_{major}{minor}"
+
+            # Architectures compiled into the current PyTorch build
+            supported_arches = []
+            if hasattr(torch.cuda, "get_arch_list"):
+                supported_arches = torch.cuda.get_arch_list() or []
+
+            if supported_arches and device_arch not in supported_arches:
+                print(
+                    f"Warning: GPU architecture {device_arch} is not supported by this PyTorch build "
+                    f"({', '.join(supported_arches)}). Using CPU instead."
+                )
+                return False
+
+            return True
+        except Exception:
+            return False
     
     def train(self, total_timesteps: int, **kwargs):
         """
@@ -208,7 +265,7 @@ class RLAgent:
         if not path.exists():
             raise FileNotFoundError(f"Model not found: {path}")
         
-        self.model = MaskablePPO.load(str(path))
+        self.model = MaskablePPO.load(str(path), device=self.device)
         
         # Extract environment from model
         if hasattr(self.model, 'env') and self.model.env is not None:

@@ -35,6 +35,7 @@ AGENT_REGISTRY = {
     'grape_seeker': GrapeSeekerAgent,
     'immune_aggressor': ImmuneAggressorAgent,
     'stun_exploiter': StunExploiterAgent,
+    'opportunistic': StunExploiterAgent,
     'balanced_eval': BalancedEvalAgent,
     'risk_seeker': RiskSeekerAgent,
     'risk_averse': RiskAverseAgent,
