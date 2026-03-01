@@ -1,0 +1,107 @@
+{
+  "episode": 700000,
+  "phase": 4,
+  "timestamp": "2026-03-01T10:27:49.469265",
+  "results": {
+    "maxim": {
+      "wins": 52,
+      "losses": 48,
+      "win_rate": 0.52,
+      "avg_margin": 2.48
+    },
+    "minim": {
+      "wins": 84,
+      "losses": 16,
+      "win_rate": 0.84,
+      "avg_margin": 26.65
+    },
+    "exactor": {
+      "wins": 56,
+      "losses": 44,
+      "win_rate": 0.56,
+      "avg_margin": 5.46
+    },
+    "snake_avoider": {
+      "wins": 29,
+      "losses": 71,
+      "win_rate": 0.29,
+      "avg_margin": -14.43
+    },
+    "scorpion_avoider": {
+      "wins": 39,
+      "losses": 61,
+      "win_rate": 0.39,
+      "avg_margin": -6.53
+    },
+    "safe_preferrer": {
+      "wins": 30,
+      "losses": 70,
+      "win_rate": 0.3,
+      "avg_margin": -13.11
+    },
+    "hunter": {
+      "wins": 51,
+      "losses": 49,
+      "win_rate": 0.51,
+      "avg_margin": 2.3
+    },
+    "safe_hunter": {
+      "wins": 28,
+      "losses": 72,
+      "win_rate": 0.28,
+      "avg_margin": -15.53
+    },
+    "anti_capture": {
+      "wins": 56,
+      "losses": 44,
+      "win_rate": 0.56,
+      "avg_margin": 6.81
+    },
+    "grape_seeker": {
+      "wins": 29,
+      "losses": 71,
+      "win_rate": 0.29,
+      "avg_margin": -15.26
+    },
+    "immune_aggressor": {
+      "wins": 32,
+      "losses": 68,
+      "win_rate": 0.32,
+      "avg_margin": -14.74
+    },
+    "stun_exploiter": {
+      "wins": 48,
+      "losses": 52,
+      "win_rate": 0.48,
+      "avg_margin": -1.43
+    },
+    "opportunistic": {
+      "wins": 43,
+      "losses": 57,
+      "win_rate": 0.43,
+      "avg_margin": -2.48
+    },
+    "balanced_eval": {
+      "wins": 13,
+      "losses": 87,
+      "win_rate": 0.13,
+      "avg_margin": -25.06
+    },
+    "risk_seeker": {
+      "wins": 21,
+      "losses": 79,
+      "win_rate": 0.21,
+      "avg_margin": -24.25
+    },
+    "risk_averse": {
+      "wins": 13,
+      "losses": 87,
+      "win_rate": 0.13,
+      "avg_margin": -27.21
+    }
+  },
+  "overall_win_rate": 0.39,
+  "total_wins": 624,
+  "total_games": 1600,
+  "estimated_elo": 1012.2261048520705
+}

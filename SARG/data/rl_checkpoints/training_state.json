@@ -1,15 +1,14 @@
 {
-  "total_episodes": 742064,
+  "total_episodes": 2530938,
   "current_phase": 4,
-  "phase_episodes": 0,
+  "phase_episodes": 1788874,
   "best_win_rate": 1.0,
-  "recent_win_rate": 0.825,
+  "recent_win_rate": 0.328,
   "phase_win_rates": {
     "1": 0.85,
     "2": 0.815,
-    "3": 0.825,
     "3": 0.825
   },
-  "last_checkpoint": "2026-03-01T06:54:27.248032",
+  "last_checkpoint": "2026-03-01T11:21:32.873308",
   "snapshots": []
 }
